@@ -1,0 +1,3 @@
+from tsc template proj
+
+构建一个简单的 tsc 驱动编译的项目
