@@ -1,10 +1,10 @@
 import { List, fromJS } from "immutable"
 import { TypedMap } from "./TypedMap"
 
-export type FromJS<T> = T extends (infer L)[]
-  ? List<FromJS<L>>
+export type TypedFromJS<T> = T extends (infer L)[]
+  ? List<TypedFromJS<L>>
   : T extends { [key: string]: any }
-  ? TypedMap<{ [x in keyof T]: FromJS<T[x]> }>
+  ? TypedMap<{ [x in keyof T]: TypedFromJS<T[x]> }>
   : T
 
-export const typedFromJs: <T>(state: T) => FromJS<T> = fromJS as any
+export const typedFromJS: <T>(state: T) => TypedFromJS<T> = fromJS as any

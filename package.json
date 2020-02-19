@@ -1,9 +1,16 @@
 {
   "main": "dist/index.js",
-  "author": "liumiao",
-  "license": "ISC",
+  "type": "dist/index.d.ts",
+  "author": "刘淼 <yoix@foxmail.com>",
+  "license": "MIT",
   "name": "eoyo-react-redux",
   "version": "1.0.0",
+  "contributors": [
+    {
+      "name": "刘淼",
+      "email": "yoix@foxmail.com"
+    }
+  ],
   "scripts": {
     "work": "tsc -w",
     "lint": "eslint --ext .js,.ts ./",
@@ -19,7 +26,8 @@
     "react-dom": "^16.12.0"
   },
   "repository": {
-    "github": "https://github.com/Eoyo/eoyo-redux"
+    "type": "git",
+    "url": "https://github.com/Eoyo/eoyo-redux.git"
   },
   "devDependencies": {
     "@types/ramda": "^0.26.41",
@@ -40,5 +48,12 @@
     "postcss-modules": "^1.5.0",
     "prettier": "^1.19.1",
     "typescript": "^3.7.5"
-  }
+  },
+  "keywords": [
+    "react immutable",
+    "redux immutable",
+    "model base",
+    "selector template",
+    "typed immutable"
+  ]
 }

@@ -1,57 +1,34 @@
 /* eslint-disable react/destructuring-assignment */
 import React from "react"
-import { is } from "immutable"
-import { immutableShallowIs } from "../immutable/shallow-is"
+import { immutableShallowIs } from "../immutable/immutable-shallow-is"
 
-export abstract class IComponent<P = {}, S = {}> extends React.Component<
-  P,
-  { i: S }
-> {
-  /** immutableState 的便捷引用 */
-  iState: S
-  constructor(props: P, context?: any) {
-    super(props, context)
-    this.iState = this.initImmutableState(props)
-    this.state = {
-      i: this.iState,
-    }
-  }
-
+export class IComponent<P = {}, S = {}> extends React.Component<P, S> {
   shouldComponentUpdate(
     nextProps: Readonly<P>,
-    nextState: Readonly<{ i: S }>
+    nextState: Readonly<S>
   ): boolean {
     if (
       immutableShallowIs(this.props, nextProps) &&
-      is(this.state.i, nextState.i)
+      immutableShallowIs(this.state, nextState)
     ) {
       return false
     }
     return true
   }
 
-  update(updater: (s: S) => S) {
-    // 由于 replaceState api 被废弃, 且setState 中 state 必须为普通的对象, 所以使用 immutableState存储 immutable 的数据.
-    this.setState((s) => {
+  /**
+   * 更新 state 上的某个字段的值.
+   * @param updateKey 期望要更新的state 上的字段.
+   * @param updater 对某个字段进行更新的函数, 其中 (data: 被更新的这个字段的值, state: 当前全部的 state)
+   */
+  updateAt<UpdateKey extends keyof S>(
+    updateKey: UpdateKey,
+    updater: (data: S[UpdateKey], state: S) => S[UpdateKey]
+  ) {
+    return this.setState((s) => {
       return {
-        i: updater(s.i),
-      }
+        [updateKey]: updater(s[updateKey], s),
+      } as any
     })
   }
-
-  updateWith<UProps extends any[] = []>(
-    updater: (s: S, ...updateProps: UProps) => S
-  ) {
-    return (...p: UProps) => {
-      this.setState((s) => {
-        const updatedState = updater(s.i, ...p)
-        this.iState = updatedState
-        return {
-          i: updatedState,
-        }
-      })
-    }
-  }
-
-  abstract initImmutableState(props: P): S
 }
