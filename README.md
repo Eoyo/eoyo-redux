@@ -28,8 +28,7 @@
 
 # 详细介绍
 
-## typed immutable - 加强 immutable 数据结构的类型推断 
-
+## Typed Immutable
 ### 1. typedFromJS 和 toJS 方法.
 功能和 `fromJS` 等价, 加强了类型:
 `typedFromJS: (data: T) => FromJS<T>`
@@ -69,8 +68,9 @@ Value[] => List<Value>
 
 `ToJS<T>` 是相对于 `FromJS<T>` 相反的类型推断. 提供了 `toJS` 方法将 Immutable 的对象具有类型的转换为 普通 js 对象.
 
-### 2. TypedMap. 加强了Immutable 原始的 Map 的类型.
+### 2. TypedMap. 
 
+加强了Immutable 原始的 Map 的类型.
 `typedMap === Map`, 只是对类型进行了重载.
 
 主要是对一下几个方法加强了类型: 
@@ -94,25 +94,19 @@ test.set("two", "2") // error, Argument of type '"2"' is not assignable to param
 
 > Immutable 4.0.0 中实现了 Record, 但是 Record 的构建速度不及 Map, 而且还不可以直接使用 fromJS 来生成 Immutable 的结构, 不方便持久化. 实际使用中只需要类型加强的 TypedMap 替代就好了. 
 
-## Immutable with react - 使用 Immutable 优化 react 组件的性能.
+## Immutable With React 
 
-主要是提供了一个 IComponent 组件, 继承自 React.Component, IComponent 内置了 shouldComponentUpdate 的计算, 以及提供了一些操作本地的 immutable state 的方法. 
+使用 Immutable 优化 React 的性能, 提供一个 IComponent 组件, 继承自 React.Component. IComponent 内置了 shouldComponentUpdate 的计算, 以及提供了一些操作本地的 immutable state 的方法. 
 
 1. 对于参数 props, 使用内置的 `immutableShallowIs` 进行比较, 允许 props 是一个 有的字段是 immutable 数据结构的浅比较.
 2. 对于组件的状态 state, 也使用了 `immutableShallowIs` 进行比较, 允许 state 是一个 有的字段是 immutable 的数据结构
-
-`IComponent` 中提供的新的方法:
-
-1. IComponent.updateAt -- 更新 state 上的某个字段的值.
+3. `IComponent.updateAt` 用于更新 state 上的某个字段的值.
 
 ### `IComponent` 使用举例: 
 ```tsx
 import React from "react"
 import { range } from "ramda"
-import { typedFromJS } from "../immutable/FromJS"
-import { typedMap } from "../immutable/TypedMap"
-import { Item } from "./test-item"
-import { IComponent } from "../react/immutable-react"
+import { typedFromJS, typedMap, IComponent } from "eoyo-react-redux"
 
 // 1. 构建一段 immutable 的默认值
 const AppState = typedFromJS({
@@ -161,7 +155,7 @@ export class AppTest extends IComponent<
             .get("items")
             .toArray()
             .map((one) => {
-              return <Item key={one.get("age")} data={one} />
+              return one.get('age')
             })}
         </div>
       </div>
