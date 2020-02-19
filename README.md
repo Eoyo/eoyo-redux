@@ -8,25 +8,33 @@
 
 
 > **注意**: 
->1. 数据的结构使用 immutable 实现. 其中为了实现 `TypedFromJS<T>` 的类型, 使用了复杂的递归类型, 要求 `typescript 3.7+`;
+>1. 数据的结构使用 immutable 实现. 其中为了实现 `FromJS<T>` 的类型, 使用了复杂的递归类型, 要求 `typescript 3.7+`;
 
 # 功能大纲
+
 
 - [ ] model base
 - [ ] selector template
 - [ ] immutable model
 - [ ] data schema
 - [x] typed immutable
+  - [x] `FromJs`, `ToJS` - 提供普通 js 对象和 Immutable 对象之间的类型转换.
+  - [x] `typeMap`, `typedFromJS` - 对原始的 immutable 方法 加强类型.
 - [x] immutable with react
+  - [x] `immutableShallowIs` - 混有 immutable 数据结构的浅比较
+  - [x] `IComponent` - 内置了使用 `immutableShallowIs` 对比数据是否变化的基本组件, 用于替代 React.PureComponent.
 
+> 功能大纲中类似 `FromJS` 这种在**代码块**中的, 表示可以通过 `import { FromJS } from "eoyo-react-redux"` 获取到.
+
+# 详细介绍
 
 ## typed immutable - 加强 immutable 数据结构的类型推断 
 
-### 1. typedFromJS 
+### 1. typedFromJS 和 toJS 方法.
 功能和 `fromJS` 等价, 加强了类型:
-`typedFromJS: (data: T) => TypedFromJS<T>`
+`typedFromJS: (data: T) => FromJS<T>`
 
-返回值的类型为`TypedFromJS<T>`, 提供强大的类型推断, 要求typescript为 3.7+;
+返回值的类型为`FromJS<T>`, 提供强大的类型推断, 要求typescript为 3.7+;
 
 ```ts
 const appState = typedFromJs({
@@ -59,13 +67,18 @@ Value[] => List<Value>
 ```
 不断的递归使用以上的规则. 可以推断普通的 JS 对象 在 fromJS 后生成的对应的 Immutable 的数据结构.
 
+`ToJS<T>` 是相对于 `FromJS<T>` 相反的类型推断. 提供了 `toJS` 方法将 Immutable 的对象具有类型的转换为 普通 js 对象.
+
 ### 2. TypedMap. 加强了Immutable 原始的 Map 的类型.
 
-主要是对一下几个方法加强了类型, 使得可以对具体具有的key检测.
+`typedMap === Map`, 只是对类型进行了重载.
+
+主要是对一下几个方法加强了类型: 
 1. get
 2. set
 3. merge
 4. update
+5. toJS 
 
 ```ts
 const test = typedMap<{ one: string; two: "two" }>({

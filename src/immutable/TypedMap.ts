@@ -1,4 +1,5 @@
 import { Map } from "immutable"
+import { ToJS } from "./ToJS"
 
 // @ts-ignore;
 export interface TypedMap<T extends { [x: string]: any }>
@@ -10,6 +11,9 @@ export interface TypedMap<T extends { [x: string]: any }>
     updateKey: Key,
     updater: (k: T[Key]) => T[Key]
   ): this
+  toJS(): {
+    [x in keyof T]: ToJS<T[x]>
+  }
 }
 
 export const typedMap: <Obj>(obj: Obj) => TypedMap<Obj> = Map as any
