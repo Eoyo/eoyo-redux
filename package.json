@@ -4,7 +4,7 @@
   "author": "刘淼 <yoix@foxmail.com>",
   "license": "MIT",
   "name": "eoyo-react-redux",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "contributors": [
     {
       "name": "刘淼",
@@ -30,12 +30,11 @@
     "url": "https://github.com/Eoyo/eoyo-redux.git"
   },
   "devDependencies": {
-    "@types/ramda": "^0.26.41",
     "@types/node": "^13.7.1",
+    "@types/ramda": "^0.26.41",
     "@typescript-eslint/eslint-plugin": "^2.20.0",
     "@typescript-eslint/parser": "^2.20.0",
     "eslint": "^6.8.0",
-    "ramda": "^0.27.0",
     "eslint-config-airbnb": "^18.0.1",
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-config-prettier": "^6.10.0",
@@ -47,6 +46,7 @@
     "parcel": "^1.12.4",
     "postcss-modules": "^1.5.0",
     "prettier": "^1.19.1",
+    "ramda": "^0.27.0",
     "typescript": "^3.7.5"
   },
   "keywords": [
