@@ -1,6 +1,6 @@
 {
   "main": "dist/index.js",
-  "type": "dist/index.d.ts",
+  "types": "dist/index.d.ts",
   "author": "刘淼 <yoix@foxmail.com>",
   "license": "MIT",
   "name": "eoyo-react-redux",
