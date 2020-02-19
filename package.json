@@ -4,7 +4,7 @@
   "author": "刘淼 <yoix@foxmail.com>",
   "license": "MIT",
   "name": "eoyo-react-redux",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "files": [
     "dist"
   ],
