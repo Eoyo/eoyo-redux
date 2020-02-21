@@ -2,13 +2,19 @@
   "compilerOptions": {
     "target": "ES5",
     "module": "commonjs",
-    "declaration": true,
     "outDir": "./dist",
-    "rootDir": "./src",
+    "rootDir": "./",
     "strict": true,
     "esModuleInterop": true,
-    "jsx": "react"
+    "jsx": "react",
+    "baseUrl": "./",
+    "paths": {
+      "dist": ["dist"]
+    },
+    "allowJs": true,
+    "checkJs": true,
+    "downlevelIteration": true
   },
-  "include": ["src/index.ts"],
+  "include": ["src", "__test__"],
   "exclude": ["node_modules"]
 }

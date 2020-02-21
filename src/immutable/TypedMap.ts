@@ -7,6 +7,7 @@ export interface TypedMap<T extends { [x: string]: any }>
   get<Key extends keyof T>(k: Key): T[Key]
   set<Key extends keyof T>(k: Key, v: T[Key]): this
   merge<Key extends keyof T>(mergeObj: { [k in Key]: T[Key] }): this
+  merge<KC, VC>(...collections: Array<Iterable<[KC, VC]>>): this
   update<Key extends keyof T>(
     updateKey: Key,
     updater: (k: T[Key]) => T[Key]
