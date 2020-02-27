@@ -24,7 +24,8 @@
     "lint-fix": "eslint --ext .js,.ts ./ --fix",
     "start": "parcel src/test/index.html",
     "build": "tsc -p ./tsconfig.build.json",
-    "test": "jest"
+    "test": "jest",
+    "pub": "yarn lint && yarn test && yarn build && yarn publish"
   },
   "dependencies": {
     "@types/react": "^16.9.20",
