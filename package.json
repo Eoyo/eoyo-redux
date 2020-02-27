@@ -8,7 +8,7 @@
   "author": "刘淼 <yoix@foxmail.com>",
   "license": "MIT",
   "name": "eoyo-react-redux",
-  "version": "1.0.6",
+  "version": "1.0.7",
   "files": [
     "dist"
   ],
@@ -28,12 +28,12 @@
     "pub": "yarn lint && yarn test && yarn build && yarn publish"
   },
   "dependencies": {
-    "@types/react": "^16.9.20",
-    "@types/react-dom": "^16.9.5",
+    "@types/react": "^16.9.22",
+    "@types/react-dom": "^16.0.9",
     "@types/redux-actions": "^2.6.1",
-    "immutable": "^4.0.0-rc.12",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "immutable": "4.0.0-rc.12",
+    "react": "16.8.1",
+    "react-dom": "^16.6.1",
     "redux-actions": "^2.6.5"
   },
   "repository": {

@@ -1,3 +1,9 @@
 src
 .postcssrc.json
 sign.txt
+.vscode
+__test__
+tsconfig.json
+tsconfig.build.json
+jest.config.js
+yarn.lock
