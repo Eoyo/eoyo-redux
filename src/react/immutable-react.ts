@@ -1,6 +1,6 @@
 /* eslint-disable react/destructuring-assignment */
 import React from "react"
-import { immutableShallowIs } from "../immutable/immutable-shallow-is"
+import { objImmutableShallowIs } from "../immutable/immutable-shallow-is"
 
 export class IComponent<P = {}, S = {}> extends React.Component<P, S> {
   shouldComponentUpdate(
@@ -8,8 +8,8 @@ export class IComponent<P = {}, S = {}> extends React.Component<P, S> {
     nextState: Readonly<S>
   ): boolean {
     if (
-      immutableShallowIs(this.props, nextProps) &&
-      immutableShallowIs(this.state, nextState)
+      objImmutableShallowIs(this.props, nextProps) &&
+      objImmutableShallowIs(this.state, nextState)
     ) {
       return false
     }

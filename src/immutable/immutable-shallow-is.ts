@@ -5,10 +5,32 @@ import { is } from "immutable"
  * @param first
  * @param second
  */
-export function immutableShallowIs(
-  first: { [x: string]: any },
-  second: { [x: string]: any }
-) {
+export function immutableShallowIs(first: any, second: any) {
+  if (first === second) {
+    return true
+  }
+  if (
+    typeof first === "object" &&
+    typeof second === "object" &&
+    first !== null &&
+    second !== null
+  ) {
+    const a = Array.isArray(first)
+    const b = Array.isArray(second)
+    if (a !== b) {
+      return false
+    }
+    if (a && b) {
+      return !first.some((one: any, index: any) => {
+        return !is(one, second[index])
+      })
+    }
+    return objImmutableShallowIs(first, second)
+  }
+  return first === second
+}
+
+export function objImmutableShallowIs(first: any, second: any) {
   if (first === second) {
     return true
   }
